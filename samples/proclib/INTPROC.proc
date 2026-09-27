@@ -1,0 +1,13 @@
+//INTPROC  PROC ENV=TEST,RUNDATE=
+//*--------------------------------------------------------------------
+//* INTPROC - RUNS INTCALC AGAINST THE CUSTOMER MASTER (SYNTHETIC)
+//*--------------------------------------------------------------------
+//CALC     EXEC PGM=INTCALC,PARM='&RUNDATE'
+//STEPLIB  DD DSN=&ENV..LOADLIB,DISP=SHR
+//CUSTIN   DD DSN=&ENV..CUST.MASTER,DISP=SHR
+//CUSTOUT  DD DSN=&ENV..CUST.MASTER.NEW,
+//            DISP=(NEW,CATLG,DELETE),SPACE=(CYL,(10,5))
+//EXCPRPT  DD DSN=&ENV..INT.EXCEPTIONS,
+//            DISP=(NEW,CATLG,DELETE),SPACE=(TRK,(5,5))
+//SYSOUT   DD SYSOUT=*
+//         PEND

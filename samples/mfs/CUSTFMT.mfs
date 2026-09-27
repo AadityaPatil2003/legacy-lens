@@ -1,0 +1,29 @@
+*********************************************************************
+* CUSTFMT - IMS MFS FORMAT FOR CUSTOMER DISPLAY (SYNTHETIC SAMPLE)   *
+* WRITTEN FOR THE LEGACYLENS DEMO. NOT TAKEN FROM ANY REAL SYSTEM.   *
+*********************************************************************
+CUSTFMT  FMT
+         DEV   TYPE=(3270,2),FEAT=IGNORE,DSCA=X'00C0'
+         DIV   TYPE=INOUT
+         DPAGE CURSOR=((3,20))
+         DFLD  'CUSTOMER DISPLAY',POS=(1,30)
+         DFLD  'CUSTOMER ID:',POS=(3,5)
+CUSTNO   DFLD  POS=(3,20),LTH=8,ATTR=(NUM,MOD)
+         DFLD  'NAME:',POS=(5,5)
+CNAME    DFLD  POS=(5,20),LTH=45,ATTR=(PROT)
+         DFLD  'STATUS:',POS=(6,5)
+CSTAT    DFLD  POS=(6,20),LTH=1,ATTR=(PROT)
+ERRMSG   DFLD  POS=(22,5),LTH=60,ATTR=(PROT,HI)
+         FMTEND
+CUSTIN   MSG   TYPE=INPUT,SOR=(CUSTFMT,IGNORE)
+         SEG
+         MFLD  'CUSTINQ ',LTH=8
+         MFLD  CUSTNO,LTH=8
+         MSGEND
+CUSTOUT  MSG   TYPE=OUTPUT,SOR=(CUSTFMT,IGNORE)
+         SEG
+         MFLD  CNAME,LTH=45
+         MFLD  CSTAT,LTH=1
+         MFLD  ERRMSG,LTH=60
+         MSGEND
+         END

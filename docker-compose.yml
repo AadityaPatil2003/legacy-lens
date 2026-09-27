@@ -1,0 +1,22 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      LEGACYLENS_LLM: ${LEGACYLENS_LLM:-offline}
+      LEGACYLENS_MODEL: ${LEGACYLENS_MODEL:-llama3.1}
+      OLLAMA_URL: http://ollama:11434
+
+  # Optional local LLM. Start with: docker compose --profile llm up
+  # then pull a model once: docker compose exec ollama ollama pull llama3.1
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["llm"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+
+volumes:
+  ollama:

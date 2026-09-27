@@ -1,0 +1,26 @@
+***********************************************************************
+* ACCTSET - BMS MAPSET FOR ACCOUNT INQUIRY (SYNTHETIC SAMPLE)          *
+* WRITTEN FOR THE LEGACYLENS DEMO. NOT TAKEN FROM ANY REAL SYSTEM.     *
+***********************************************************************
+ACCTSET  DFHMSD TYPE=&SYSPARM,MODE=INOUT,LANG=COBOL,                   X
+               STORAGE=AUTO,TIOAPFX=YES,CTRL=(FREEKB,FRSET)
+ACCTMAP  DFHMDI SIZE=(24,80),LINE=1,COLUMN=1
+         DFHMDF POS=(1,30),LENGTH=20,ATTRB=(ASKIP,BRT),                X
+               INITIAL='ACCOUNT INQUIRY'
+         DFHMDF POS=(4,5),LENGTH=12,ATTRB=ASKIP,                       X
+               INITIAL='CUSTOMER ID:'
+CUSTID   DFHMDF POS=(4,18),LENGTH=8,ATTRB=(UNPROT,NUM,IC)
+         DFHMDF POS=(4,27),LENGTH=1,ATTRB=ASKIP
+         DFHMDF POS=(6,5),LENGTH=5,ATTRB=ASKIP,INITIAL='NAME:'
+NAME     DFHMDF POS=(6,18),LENGTH=25,ATTRB=(ASKIP,NORM)
+         DFHMDF POS=(8,5),LENGTH=8,ATTRB=ASKIP,INITIAL='BALANCE:'
+BAL      DFHMDF POS=(8,18),LENGTH=12,ATTRB=(ASKIP,NORM),               X
+               PICOUT='-,---,--9.99'
+         DFHMDF POS=(9,5),LENGTH=10,ATTRB=ASKIP,INITIAL='AVAILABLE:'
+AVAIL    DFHMDF POS=(9,18),LENGTH=12,ATTRB=(ASKIP,NORM),               X
+               PICOUT='-,---,--9.99'
+MSG      DFHMDF POS=(22,5),LENGTH=60,ATTRB=(ASKIP,BRT)
+         DFHMDF POS=(24,5),LENGTH=30,ATTRB=ASKIP,                      X
+               INITIAL='PF3=EXIT  ENTER=INQUIRE'
+         DFHMSD TYPE=FINAL
+         END
